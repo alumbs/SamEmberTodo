@@ -1,9 +1,18 @@
 import Ember from 'ember';
 
+const enterKeyIntegerValue = 13;
+
 export default Ember.Component.extend({
 	isTodoCompleted: false,
 	todoStyle: "none",
 	newChildTodo: "",
+	keyPress: function(e) {
+		// Add a new child todo when the enter button is
+		//pressed
+		if (e.which === enterKeyIntegerValue) {
+      this.send('addNewChildTodo');
+    }
+	},
 	actions: {
 		toggleTodoCompleted() {
 			let todoIsCompleted = this.get('isTodoCompleted');

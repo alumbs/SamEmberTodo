@@ -4,7 +4,7 @@
 	</label>
 
 	<div class="createChildTodo">
-		{{input type="text" placeholder="Enter a new child todo" value=newChildTodo}} <button {{action 'addNewChildTodo'}}>Add Todo </button>
+		{{input type="text" placeholder="Enter a new child todo" value=newChildTodo enter=keyPress}}
 	</div>
 	
 	{{#if todoModel.children}}
