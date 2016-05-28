@@ -1,0 +1,8 @@
+{{#if showTodo}}
+	<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
+		{{todoModel}}
+	</label>
+	<button {{action 'hideTodo'}}>Hide todo</button>
+{{else}}
+	<button {{action 'displayTodo'}}>Display todo</button>
+{{/if}}
