@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 function stringNullOrEmpty(str) {
 	return (!str || 0 === str.length || !str.trim());
-};
+}
 
 const enterKeyIntegerValue = 13;
 

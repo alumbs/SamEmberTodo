@@ -8,10 +8,11 @@
 	</div>
 	
 	{{#if todoModel.children}}
-		{{#each todoModel.children as |todoChild|}}
-			<ul>
-				<li>{{todoChild}}</li>
-			</ul>
-		{{/each}}
+		<ul>
+			{{#each todoModel.children as |todoChild|}}
+				{{!-- <li>{{todoChild.text}}</li> --}}
+				<li>{{single-todo todoModel=todoChild}}</li>
+			{{/each}}
+		</ul>		
 	{{/if}}
 </div>
