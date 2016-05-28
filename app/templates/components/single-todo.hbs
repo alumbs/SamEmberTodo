@@ -1,3 +1,17 @@
-<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
-	{{todoModel}}
-</label>
+<div>
+	<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
+		{{todoModel.text}}
+	</label>
+
+	<div class="createChildTodo">
+		{{input type="text" placeholder="Enter a new child todo" value=newChildTodo}} <button {{action 'addNewChildTodo'}}>Add Todo </button>
+	</div>
+	
+	{{#if todoModel.children}}
+		{{#each todoModel.children as |todoChild|}}
+			<ul>
+				<li>{{todoChild}}</li>
+			</ul>
+		{{/each}}
+	{{/if}}
+</div>

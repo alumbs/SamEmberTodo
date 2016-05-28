@@ -12,11 +12,26 @@ export default Ember.Component.extend({
 
 			if(!stringNullOrEmpty(newTodo))
 			{
+				//Get the models
 				let todoList = this.get('todos');
-				todoList.push(this.newTodo);
+
+				//Add a new child to the todoModel
+				var newTodoList = 
+					[...todoList, 
+						{
+							text:newTodo, 
+							children: []
+						}
+					];
+				
+				//Assign the new values
+				this.set('todos', newTodoList);
+
+				//Rerender the view
 				this.rerender();
 			}
 
+			//Clear the newTodo value
 			this.set('newTodo', "");
 		}
 	}
