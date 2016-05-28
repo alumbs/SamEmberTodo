@@ -1,0 +1,9 @@
+<div>
+	<label>Enter in a new todo: </label> {{input type="text" id="new-todo" placeholder="Enter a new todo" value=newTodo}} <button {{action 'addNewTodo'}}>Add Todo </button>
+</div>
+
+<ul>
+{{#each todos as |singleTodo|}}
+	<li>{{single-todo todoModel=singleTodo}}</li>
+{{/each}}
+</ul>
