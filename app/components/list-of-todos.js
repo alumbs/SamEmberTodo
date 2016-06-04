@@ -16,13 +16,6 @@ export default Ember.Component.extend({
     }
 	},
 	actions: {
-		// keyPress: function(e) {
-		// 	console.log('KeyPress gets called');
-		// 	if (e.which === 13) {
-  //       console.log('Add a new todo');
-  //       this.addNewTodo();
-  //     }
-		// },
 		addNewTodo() {
 			let newTodo = this.get('newTodo');
 

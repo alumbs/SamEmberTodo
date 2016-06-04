@@ -46,6 +46,13 @@ export default Ember.Component.extend({
 
 			//Clear the newTodo value
 			this.set('newChildTodo', "");	
+		},
+		deleteTodo(todoList, todo) {
+			//remove the model from the parent object
+			todoList.removeObject(todo);
+
+			//Rerender the view
+			this.rerender();
 		}
 	}
 });
