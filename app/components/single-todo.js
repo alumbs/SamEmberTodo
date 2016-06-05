@@ -6,10 +6,28 @@ function stringNullOrEmpty(str) {
 	return (!str || 0 === str.length || !str.trim());
 }
 
+function toggleValue(currentVal, toggleValue1, toggleValue2){
+	let newToggleVal = currentVal;
+
+	if(!stringNullOrEmpty(currentVal)){
+		if(currentVal === toggleValue1){
+			newToggleVal = toggleValue2;
+		}
+		else
+		{
+			newToggleVal = toggleValue1;
+		}
+	}
+
+	return newToggleVal;
+}
+
 export default Ember.Component.extend({
 	isTodoCompleted: false,
 	todoStyle: "none",
 	newChildTodo: "",
+	todoItemMinimized: "block",
+	minimizeTodoValue: "-",
 	keyPress: function(e) {
 		// Add a new child todo when the enter button is
 		//pressed
@@ -53,6 +71,17 @@ export default Ember.Component.extend({
 
 			//Rerender the view
 			this.rerender();
+		},
+		minimizeTodo() {
+			//get the 'todoItemMinimized' model
+			let isTodoMinimized = this.get("todoItemMinimized");
+			let minimizeTodoValue = this.get("minimizeTodoValue");
+
+			this.set("minimizeTodoValue", 
+				toggleValue(minimizeTodoValue, "+", "-"));
+
+			this.set("todoItemMinimized", 
+				toggleValue(isTodoMinimized, "block", "none"));
 		}
 	}
 });
