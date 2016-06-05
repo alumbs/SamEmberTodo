@@ -1,0 +1,23 @@
+ul.todoListStyle{
+	list-style: none;	
+}
+
+div.displayChildTodo{
+	border-left: 2px outset;
+	padding-top: 1em;
+}
+
+div.displayTodoMainSection > a.styleMinimizeButton{
+	display: inline-block;
+	font-size: 2em;
+	height: 1em;
+	width: 1em;
+}
+
+/*div.displayTodoMainSection > a.styleMinimizeButton span{
+	display: none;
+}
+
+div.displayTodoMainSection > a.styleMinimizeButton:hover span{
+	display: block;
+}*/

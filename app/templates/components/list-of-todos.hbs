@@ -2,7 +2,7 @@
 	<label>Enter in a new todo: </label> {{input type="text" id="new-todo" placeholder="Enter a new todo" value=newTodo insert-newline=keyPress}}
 </div>
 
-<ul>
+<ul class="todoListStyle">
 	{{#each todos as |singleTodo|}}
 		<li>{{single-todo todoModel=singleTodo todoListModel=todos}}  </li>
 	{{/each}}

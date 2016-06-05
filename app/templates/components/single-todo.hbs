@@ -1,19 +1,35 @@
-<div>
-	<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
-		{{todoModel.text}}
-	</label>
-	<button {{action "deleteTodo" todoListModel todoModel}}>X</button>
+<div class="displayTodo">
+	<div class="displayTodoMainSection">		
+		
+		{{#if todoModel.children}}
+			<a class="styleMinimizeButton" {{action "minimizeTodo"}}>
+				<span>{{minimizeTodoValue}}</span>
+			</a>
+		{{/if}}
 
-	<div class="createChildTodo">
-		{{input type="text" placeholder="Enter a new child todo" value=newChildTodo enter=keyPress}}
+		<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
+			{{todoModel.text}}
+		</label>
+		<button {{action "deleteTodo" todoListModel todoModel}}>X</button>
+
+		<div class="createChildTodo">
+			{{input type="text" placeholder="Enter a new child todo" value=newChildTodo enter=keyPress}}
+		</div>
+
 	</div>
-	
-	{{#if todoModel.children}}
-		<ul>
-			{{#each todoModel.children as |todoChild|}}
-				{{!-- <li>{{todoChild.text}}</li> --}}
-				<li>{{single-todo todoModel=todoChild todoListModel=todoModel.children}}</li>
-			{{/each}}
-		</ul>		
-	{{/if}}
+		
+		{{#if todoModel.children}}
+
+			<div style="display: {{todoItemMinimized}};" class="displayChildTodo {{todoModel.children}}">	
+
+				<ul class="todoListStyle">
+					{{#each todoModel.children as |todoChild|}}
+						{{!-- <li>{{todoChild.text}}</li> --}}
+						<li>{{single-todo todoModel=todoChild todoListModel=todoModel.children}}</li>
+					{{/each}}
+				</ul>		
+
+			</div>
+		{{/if}}
+
 </div>
