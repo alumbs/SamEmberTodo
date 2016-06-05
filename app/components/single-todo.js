@@ -22,12 +22,17 @@ function toggleValue(currentVal, toggleValue1, toggleValue2){
 	return newToggleVal;
 }
 
+function createNewTodoModelWithText(modelText){
+	return {text:modelText, children: []};
+}
+
 export default Ember.Component.extend({
 	isTodoCompleted: false,
 	todoStyle: "none",
 	newChildTodo: "",
 	todoItemMinimized: "block",
 	minimizeTodoValue: "-",
+	isTodoBeingEdited: false,
 	keyPress: function(e) {
 		// Add a new child todo when the enter button is
 		//pressed
@@ -36,6 +41,17 @@ export default Ember.Component.extend({
     }
 	},
 	actions: {
+		isTodoInEditMode(todoInEditMode) {
+			this.set("isTodoBeingEdited", todoInEditMode);
+		},
+		todoDoneEditing(newTodoTextValue){
+			//set the new todo text value
+			this.set("todoModel.text", newTodoTextValue);
+
+			//make sure everyone knows the todo is
+			//done being edited
+			this.send('isTodoInEditMode', false);
+		},
 		toggleTodoCompleted() {
 			let todoIsCompleted = this.get('isTodoCompleted');
 			todoIsCompleted = !todoIsCompleted;
@@ -52,7 +68,7 @@ export default Ember.Component.extend({
 				let newTodoModel = this.get('todoModel');
 
 				//Add a new child to the todoModel
-				var newChildTodoModel = {text:newChildTodo, children: []};
+				var newChildTodoModel = createNewTodoModelWithText(newChildTodo);
 				var todoChildren = [...newTodoModel.children, newChildTodoModel];
 				
 				//Assign the new values

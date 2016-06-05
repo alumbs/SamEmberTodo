@@ -1,16 +1,34 @@
 <div class="displayTodo">
-	<div class="displayTodoMainSection">		
-		
-		{{#if todoModel.children}}
-			<a class="styleMinimizeButton" {{action "minimizeTodo"}}>
-				<span>{{minimizeTodoValue}}</span>
-			</a>
-		{{/if}}
+	<div class="displayTodoMainSection">
 
-		<label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
+		{{!-- If this todo is being edited, 
+				render it as an input tag --}}
+		<div class="displayTodoText">
+			{{#if todoModel.children}}
+				<a class="styleMinimizeButton" {{action "minimizeTodo"}}>
+					<span>{{minimizeTodoValue}}</span>
+				</a>
+			{{/if}}
+
+			{{!-- {{view  value="Test value"}} --}}
+			
+			{{!-- {{#editTodoView}}
+			{{/editTodoView}} --}}
+			{{#if isTodoBeingEdited}}
+				{{#edit-todo-view class="todoEditAutofocus"}}
+					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}}/>
+				{{/edit-todo-view}}				
+			{{else}}
+				<label {{action 'isTodoInEditMode' true}}>
+					{{todoModel.text}}
+				</label>
+			{{/if}}
+
+			<button {{action "deleteTodo" todoListModel todoModel}}>X</button>
+		</div>
+		{{!-- <label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
 			{{todoModel.text}}
-		</label>
-		<button {{action "deleteTodo" todoListModel todoModel}}>X</button>
+		</label> --}}
 
 		<div class="createChildTodo">
 			{{input type="text" placeholder="Enter a new child todo" value=newChildTodo enter=keyPress}}

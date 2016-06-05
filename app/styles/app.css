@@ -2,9 +2,13 @@ ul.todoListStyle{
 	list-style: none;	
 }
 
+ul.todoListStyle > li{
+	padding-bottom: 1em;
+}
+
 div.displayChildTodo{
 	border-left: 2px outset;
-	padding-top: 1em;
+	padding-top: 0.2em;
 }
 
 div.displayTodoMainSection > a.styleMinimizeButton{
@@ -12,12 +16,26 @@ div.displayTodoMainSection > a.styleMinimizeButton{
 	font-size: 2em;
 	height: 1em;
 	width: 1em;
+	text-align: center;
 }
 
-/*div.displayTodoMainSection > a.styleMinimizeButton span{
-	display: none;
+input.todoTextEditing{
+	border:none;
+	padding:0;
+	cursor: default;
+	font-size: 0.9em;
 }
 
-div.displayTodoMainSection > a.styleMinimizeButton:hover span{
-	display: block;
-}*/
+input.todoTextEditing:oninput,
+input.todoTextEditing:onfocus{
+	border: none;
+}
+
+div.displayTodoMainSection > div.displayTodoText{
+	font-size: 1.5em;
+}
+
+div.displayTodoMainSection > div.displayTodoText > 
+div.todoEditAutofocus{
+	display: inline-block;
+}
