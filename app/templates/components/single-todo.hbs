@@ -18,18 +18,18 @@
 
 	</div>
 		
-		{{#if todoModel.children}}
+	{{#if todoModel.children}}
 
-			<div style="display: {{todoItemMinimized}};" class="displayChildTodo {{todoModel.children}}">	
+		<div style="display: {{todoItemMinimized}};" class="displayChildTodo {{todoModel.children}}">	
 
-				<ul class="todoListStyle">
-					{{#each todoModel.children as |todoChild|}}
-						{{!-- <li>{{todoChild.text}}</li> --}}
-						<li>{{single-todo todoModel=todoChild todoListModel=todoModel.children}}</li>
-					{{/each}}
-				</ul>		
+			<ul class="todoListStyle">
+				{{#each todoModel.children as |todoChild|}}
+					{{!-- <li>{{todoChild.text}}</li> --}}
+					<li>{{single-todo todoModel=todoChild todoListModel=todoModel.children}}</li>
+				{{/each}}
+			</ul>		
 
-			</div>
-		{{/if}}
+		</div>
+	{{/if}}
 
 </div>
