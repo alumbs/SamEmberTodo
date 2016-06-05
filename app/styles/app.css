@@ -11,12 +11,14 @@ div.displayChildTodo{
 	padding-top: 0.2em;
 }
 
-div.displayTodoMainSection > a.styleMinimizeButton{
+div.displayTodoMainSection > div.displayTodoText > a.styleMinimizeButton{
 	display: inline-block;
-	font-size: 2em;
+	font-size: 1.3em;
+	/*font-size: 2em;
 	height: 1em;
-	width: 1em;
+	width: 1em;*/
 	text-align: center;
+	cursor: pointer;
 }
 
 input.todoTextEditing{
