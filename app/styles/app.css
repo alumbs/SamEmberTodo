@@ -41,3 +41,16 @@ div.displayTodoMainSection > div.displayTodoText >
 div.todoEditAutofocus{
 	display: inline-block;
 }
+
+div.displayTodoMainSection > div.displayTodoText > 
+label.displayTodoLabel{
+	min-width: 4em;
+	display: inline-block;
+	height: 1em;
+}
+
+div.displayTodoMainSection > div.displayTodoText > 
+input[type="checkbox"]{
+	height: 1.5em;
+	width: 1.5em;
+}
