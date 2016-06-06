@@ -33,14 +33,51 @@ export default Ember.Component.extend({
 	todoItemMinimized: "block",
 	minimizeTodoValue: "-",
 	isTodoBeingEdited: false,
-	keyPress: function(e) {
+
+	toggleTodoCompleted: function() {
+		// console.log("toggleTodoCompleted called");
+		let todoIsCompleted = this.get('isTodoCompleted');
+		// todoIsCompleted = !todoIsCompleted;
+		// this.set('isTodoCompleted', todoIsCompleted);
+		this.set('todoStyle', todoIsCompleted ? "line-through": "none");
+	}.observes('isTodoCompleted'),
+
+	EnterkeyPressed: function(e) {
 		// Add a new child todo when the enter button is
 		//pressed
 		if (e.which === enterKeyIntegerValue) {
-      this.send('addNewChildTodo');
+      return true;
+      // this.send('addNewChildTodo');
     }
+
+    return false;
 	},
 	actions: {
+		addNewSiblingTodo(e) {
+			// console.log("addNewSiblingTodo called " + e);
+
+			if(this.EnterkeyPressed(e)){
+				// console.log("Enter key pressed");
+
+				//Get the models
+				let todoList = this.get('todoListModel');
+
+				//Add a new child to the todoModel
+				var newTodoList = 
+					[...todoList, 
+						{
+							text:"", 
+							children: []
+						}
+					];
+				
+				//Assign the new values
+				this.set('todoListModel', newTodoList);
+
+				//Rerender the view
+				this.rerender();	
+			}				
+		},
 		isTodoInEditMode(todoInEditMode) {
 			this.set("isTodoBeingEdited", todoInEditMode);
 		},
@@ -52,12 +89,12 @@ export default Ember.Component.extend({
 			//done being edited
 			this.send('isTodoInEditMode', false);
 		},
-		toggleTodoCompleted() {
-			let todoIsCompleted = this.get('isTodoCompleted');
-			todoIsCompleted = !todoIsCompleted;
-			this.set('isTodoCompleted', todoIsCompleted);
-			this.set('todoStyle', todoIsCompleted ? "line-through": "none");
-		},
+		// toggleTodoCompleted() {
+		// 	let todoIsCompleted = this.get('isTodoCompleted');
+		// 	todoIsCompleted = !todoIsCompleted;
+		// 	this.set('isTodoCompleted', todoIsCompleted);
+		// 	this.set('todoStyle', todoIsCompleted ? "line-through": "none");
+		// },
 		addNewChildTodo() {
 			//Get the models
 			let newChildTodo = this.get('newChildTodo');

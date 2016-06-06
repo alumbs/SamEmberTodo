@@ -11,16 +11,19 @@
 			{{/if}}
 			
 			{{!-- Show the TodoCompleted symbol --}}
-			<button {{action 'toggleTodoCompleted'}}>
+			{{input class="todoCompletedCheckbox" type="checkbox" checked=isTodoCompleted}}
+			{{!-- <button {{action 'toggleTodoCompleted'}}>
 				&#10003;
-			</button>
+			</button> --}}
 
 			{{#if isTodoBeingEdited}}
 				{{#edit-todo-view class="todoEditAutofocus"}}
-					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} Style="text-decoration:{{todoStyle}}"/>
+
+					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} onkeypress={{action 'addNewSiblingTodo'}} Style="text-decoration:{{todoStyle}}"/>
+
 				{{/edit-todo-view}}				
 			{{else}}
-				<label {{action 'isTodoInEditMode' true}} Style="text-decoration:{{todoStyle}}">
+				<label class="displayTodoLabel" {{action 'isTodoInEditMode' true}} Style="text-decoration:{{todoStyle}}">
 					{{todoModel.text}}
 				</label>
 			{{/if}}
@@ -32,7 +35,7 @@
 		</label> --}}
 
 		<div class="createChildTodo">
-			{{input type="text" placeholder="Enter a new child todo" value=newChildTodo enter=keyPress}}
+			{{input type="text" placeholder="Enter a new child todo" value=newChildTodo action="addNewChildTodo"}}
 		</div>
 
 	</div>
