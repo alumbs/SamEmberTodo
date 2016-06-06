@@ -9,17 +9,18 @@
 					<span>{{minimizeTodoValue}}</span>
 				</a>
 			{{/if}}
-
-			{{!-- {{view  value="Test value"}} --}}
 			
-			{{!-- {{#editTodoView}}
-			{{/editTodoView}} --}}
+			{{!-- Show the TodoCompleted symbol --}}
+			<button {{action 'toggleTodoCompleted'}}>
+				&#10003;
+			</button>
+
 			{{#if isTodoBeingEdited}}
 				{{#edit-todo-view class="todoEditAutofocus"}}
-					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}}/>
+					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} Style="text-decoration:{{todoStyle}}"/>
 				{{/edit-todo-view}}				
 			{{else}}
-				<label {{action 'isTodoInEditMode' true}}>
+				<label {{action 'isTodoInEditMode' true}} Style="text-decoration:{{todoStyle}}">
 					{{todoModel.text}}
 				</label>
 			{{/if}}
