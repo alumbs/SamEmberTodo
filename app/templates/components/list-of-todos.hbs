@@ -3,7 +3,20 @@
 </div>
 
 <ul class="todoListStyle">
-	{{#each todos as |singleTodo|}}
-		<li>{{single-todo todoModel=singleTodo todoListModel=todos}}  </li>
+	{{#each todos as |singleTodo key|}}
+		<li>
+			{{!-- {{#if todoKeyIsValid key}}
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=singleTodo}}  
+			{{else}}
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=null}} 
+			{{/if}} --}}
+			{{#if (isTodoIndexValid key)}}
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=(returnPrevTodoItem key todos)}}  
+			{{else}}
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=null}} 
+			{{/if}}
+			
+		</li>
+		{{!-- Set variable for previous todo, and send it in --}}
 	{{/each}}
 </ul>

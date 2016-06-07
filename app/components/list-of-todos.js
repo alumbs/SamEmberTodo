@@ -8,6 +8,10 @@ const enterKeyIntegerValue = 13;
 
 export default Ember.Component.extend({
 	newTodo: "",
+	todoKeyIsValid: function(index){
+		console.log("todoKeyIsValid called");
+		return index > 0;
+	},
 	keyPress: function(e) {
 		// Add a new todo when the enter button is
 		//pressed

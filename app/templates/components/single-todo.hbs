@@ -12,14 +12,11 @@
 			
 			{{!-- Show the TodoCompleted symbol --}}
 			{{input class="todoCompletedCheckbox" type="checkbox" checked=isTodoCompleted}}
-			{{!-- <button {{action 'toggleTodoCompleted'}}>
-				&#10003;
-			</button> --}}
 
 			{{#if isTodoBeingEdited}}
-				{{#edit-todo-view class="todoEditAutofocus"}}
+				{{#edit-todo-view class="todoEditAutofocus" target=this}}
 
-					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} onkeypress={{action 'addNewSiblingTodo'}} Style="text-decoration:{{todoStyle}}"/>
+					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} onkeypress={{action 'handleKeyPress' allowedKeys="alt"}} Style="text-decoration:{{todoStyle}}"/>
 
 				{{/edit-todo-view}}				
 			{{else}}
@@ -30,9 +27,6 @@
 
 			<button {{action "deleteTodo" todoListModel todoModel}}>X</button>
 		</div>
-		{{!-- <label {{action 'toggleTodoCompleted'}} Style="text-decoration:{{todoStyle}}">
-			{{todoModel.text}}
-		</label> --}}
 
 		<div class="createChildTodo">
 			{{input type="text" placeholder="Enter a new child todo" value=newChildTodo action="addNewChildTodo"}}
@@ -45,9 +39,20 @@
 		<div style="display: {{todoItemMinimized}};" class="displayChildTodo {{todoModel.children}}">	
 
 			<ul class="todoListStyle">
-				{{#each todoModel.children as |todoChild|}}
-					{{!-- <li>{{todoChild.text}}</li> --}}
-					<li>{{single-todo todoModel=todoChild todoListModel=todoModel.children}}</li>
+				{{#each todoModel.children as |todoChild key|}}
+					<li>
+						{{!-- {{single-todo todoModel=todoChild todoListModel=todoModel.children}} --}}
+						{{#if (isTodoIndexValid key)}}
+
+							{{single-todo todoModel=todoChild todoListModel=todoModel.children previousTodo=(returnPrevTodoItem key todoModel.children)}}  
+
+						{{else}}
+
+							{{single-todo todoModel=todoChild todoListModel=todoModel.children previousTodo=null}}
+							
+						{{/if}}
+	
+					</li>
 				{{/each}}
 			</ul>		
 
