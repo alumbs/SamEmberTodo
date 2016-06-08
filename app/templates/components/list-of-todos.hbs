@@ -11,9 +11,9 @@
 				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=null}} 
 			{{/if}} --}}
 			{{#if (isTodoIndexValid key)}}
-				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=(returnPrevTodoItem key todos)}}  
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=(returnPrevTodoItem key todos) parentTodoList=null}}  
 			{{else}}
-				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=null}} 
+				{{single-todo todoModel=singleTodo todoListModel=todos previousTodo=null parentTodoList=null}} 
 			{{/if}}
 			
 		</li>
