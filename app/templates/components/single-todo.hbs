@@ -16,7 +16,7 @@
 			{{#if isTodoBeingEdited}}
 				{{#edit-todo-view class="todoEditAutofocus" target=this}}
 
-					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} onkeypress={{action 'handleKeyPress' allowedKeys="alt"}} Style="text-decoration:{{todoStyle}}"/>
+					<input type="text" name="todoText" class="todoTextEditing" value={{todoModel.text}} onblur={{action 'todoDoneEditing' value="target.value"}} onkeypress={{action 'handleKeyPress' allowedKeys="shift"}} Style="text-decoration:{{todoStyle}}"/>
 
 				{{/edit-todo-view}}				
 			{{else}}
@@ -44,11 +44,11 @@
 						{{!-- {{single-todo todoModel=todoChild todoListModel=todoModel.children}} --}}
 						{{#if (isTodoIndexValid key)}}
 
-							{{single-todo todoModel=todoChild todoListModel=todoModel.children previousTodo=(returnPrevTodoItem key todoModel.children)}}  
+							{{single-todo todoModel=todoChild parentTodoList=todoListModel todoListModel=todoModel.children previousTodo=(returnPrevTodoItem key todoModel.children) }}  
 
 						{{else}}
 
-							{{single-todo todoModel=todoChild todoListModel=todoModel.children previousTodo=null}}
+							{{single-todo todoModel=todoChild parentTodoList=todoListModel todoListModel=todoModel.children previousTodo=null }}
 							
 						{{/if}}
 	

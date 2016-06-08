@@ -34,7 +34,38 @@ export default Ember.Component.extend({
 	todoItemMinimized: "block",
 	minimizeTodoValue: "-",
 	isTodoBeingEdited: false,
-	tryMakeCurrentTodoASibling() {
+	deleteTodoFromList(todoList, todo) {
+		//remove the model from the parent object
+		if(todoList && todo)
+		{
+			todoList.removeObject(todo);
+		}
+	},
+
+	tryMakeCurrentTodoASibling(){
+		//Get the todoListModel
+		var todoList = this.get('todoListModel');
+
+		//get the current todo
+		let currentTodoModel = this.get('todoModel');
+
+		//get parent todoList
+		let parentTodoList = this.get('parentTodoList');
+
+		if(parentTodoList)
+		{
+			//delete the currentTodoModel from its todoList
+			this.deleteTodoFromList(todoList, currentTodoModel);
+
+			let newParentTodoList = [...parentTodoList, currentTodoModel];
+				
+			//set the parent todoList's children
+			this.set('parentTodoList', newParentTodoList);
+
+			this.rerender();
+		}
+	},
+	tryMakeCurrentTodoAChild() {
 		//Get the todoListModel
 		var todoList = this.get('todoListModel');
 
@@ -51,7 +82,8 @@ export default Ember.Component.extend({
 			let newPreviousTodoChildren = [...prevTodo.children, currentTodoModel];
 
 			//remove the model from the parent object
-			todoList.removeObject(currentTodoModel);
+			// todoList.removeObject(currentTodoModel);
+			this.deleteTodoFromList(todoList, currentTodoModel);
 
 			//set the previous todo's children
 			this.set('previousTodo.children', newPreviousTodoChildren);
@@ -99,6 +131,13 @@ export default Ember.Component.extend({
     return false;
 	},
 
+	ShiftTabKeyPressed: function(e){
+		if(e.shiftKey && this.TabKeyPressed(e)){
+			return true;
+		}
+		return false;
+	},
+
 	EnterkeyPressed: function(e) {
 		// Add a new child todo when the enter button is
 		//pressed
@@ -116,12 +155,16 @@ export default Ember.Component.extend({
 				// console.log("Enter key pressed");
 
 				this.addNewSiblingTodo();	
+			}			
+			else if(this.ShiftTabKeyPressed(e)){
+				// console.log("Shift+Tab key pressed");
+				this.tryMakeCurrentTodoASibling();
 			}
 			else if(this.TabKeyPressed(e)){
 				//Make the current todo element the child element
 				// console.log("Tab key pressed");
 
-				this.tryMakeCurrentTodoASibling();
+				this.tryMakeCurrentTodoAChild();
 			}
 		},
 
@@ -162,7 +205,8 @@ export default Ember.Component.extend({
 		},
 		deleteTodo(todoList, todo) {
 			//remove the model from the parent object
-			todoList.removeObject(todo);
+			// todoList.removeObject(todo);
+			this.deleteTodoFromList(todoList, todo);
 
 			//Rerender the view
 			this.rerender();
